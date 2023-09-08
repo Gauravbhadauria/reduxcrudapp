@@ -2,12 +2,12 @@ import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
-import { deleteUser } from '../redux/UserSlice';
+import {deleteUser} from '../redux/UserSlice';
 
 const Users = () => {
   const navigation = useNavigation();
   const users = useSelector(state => state.user);
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   console.log(users);
   return (
     <View style={{flex: 1}}>
@@ -18,31 +18,52 @@ const Users = () => {
             <View
               style={{
                 width: '90%',
-                padding:10,
+                padding: 10,
                 borderWidth: 1,
                 alignSelf: 'center',
-                marginTop:20,
-                borderRadius:10,
-                justifyContent:'space-between',
-                flexDirection:'row'
+                marginTop: 20,
+                borderRadius: 10,
+                justifyContent: 'space-between',
+                flexDirection: 'row',
               }}>
               <View>
-              <Text>{"Name: "+item.name}</Text>
-                <Text>{"Email: "+item.email}</Text>
-                <Text>{"Mobile: "+item.mobile}</Text>
-                <Text>{"Address: "+item.address}</Text>
+                <Text>{'Name: ' + item.name}</Text>
+                <Text>{'Email: ' + item.email}</Text>
+                <Text>{'Mobile: ' + item.mobile}</Text>
+                <Text>{'Address: ' + item.address}</Text>
               </View>
-              <View style={{marginRight:10}}>
-                <Text style={{padding:5,borderWidth:1,borderColor:'blue',color:'blue'}}
-                onPress={()=>{
-                    navigation.navigate('AddUser',{type:'edit',data:item,index:index});
-                }}>Edit</Text>
-                <Text  style={{padding:5,borderWidth:1,borderColor:'red',color:'red',marginTop:10}}
-                onPress={()=>{
-            dispatch(deleteUser(index))
-                }}>Delete</Text>
+              <View style={{marginRight: 10}}>
+                <Text
+                  style={{
+                    padding: 5,
+                    borderWidth: 1,
+                    borderColor: 'blue',
+                    color: 'blue',
+                  }}
+                  onPress={() => {
+                    navigation.navigate('AddUser', {
+                      type: 'edit',
+                      data: item,
+                      index: index,
+                    });
+                  }}>
+                  Edit
+                </Text>
+                <Text
+                  style={{
+                    padding: 5,
+                    borderWidth: 1,
+                    borderColor: 'red',
+                    color: 'red',
+                    marginTop: 10,
+                  }}
+                  onPress={() => {
+                    dispatch(deleteUser(index));
+                  }}>
+                  Delete
+                </Text>
               </View>
-              </View>
+            </View>
           );
         }}
       />
@@ -58,7 +79,7 @@ const Users = () => {
           alignItems: 'center',
         }}
         onPress={() => {
-          navigation.navigate('AddUser',{type:'add'});
+          navigation.navigate('AddUser', {type: 'add'});
         }}>
         <Text style={{color: 'white', fontSize: 16}}>Add New User</Text>
       </TouchableOpacity>
